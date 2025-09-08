@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Uttam Siksha Institute</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap');
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html {
+      scroll-behavior: smooth; /* 🔥 Smooth scrolling everywhere */
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0f0f1f, #000);
+      color: #e5e5e5;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(15,15,31,0.9);
+      backdrop-filter: blur(12px);
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 50px; color:#0ff;
+      position:fixed; width:100%; top:0; z-index:1000;
+      border-bottom: 1px solid rgba(0,255,255,0.3);
+      box-shadow:0 0 20px rgba(0,255,255,0.3);
+      transition:all 0.3s ease;
+    }
+    header .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: #0ff;
+      text-shadow: 0 0 12px #0ff;
+    }
+    nav a {
+      margin-left:25px; text-decoration:none; color:#ccc;
+      font-weight:500; transition:0.3s;
+    }
+    nav a.active, nav a:hover {
+      color:#0ff; text-shadow:0 0 10px #0ff;
+    }
+
+    /* HERO */
+    .hero {
+      height:100vh;
+      background: url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+      position:relative; display:flex; justify-content:center; align-items:center;
+      text-align:center; color:white; overflow:hidden;
+    }
+    .hero::after {
+      content:""; position:absolute; inset:0; background:rgba(0,0,0,0.7);
+    }
+    .hero-content {
+      position:relative; z-index:1; max-width:900px;
+      animation: fadeIn 2s ease forwards;
+    }
+    .hero h1 {
+      font-family:'Orbitron', sans-serif; font-size:65px;
+      background: linear-gradient(90deg, #0ff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px #0ff;
+      margin-bottom:20px;
+      animation: glow 3s infinite alternate;
+    }
+    .hero p {
+      font-size:22px; margin-bottom:30px;
+      color:#ccc; text-shadow:0 0 10px #0ff;
+    }
+    .hero button {
+      background: transparent;
+      border:2px solid #0ff;
+      padding:12px 40px; border-radius:50px;
+      color:#0ff; font-size:18px; font-weight:bold;
+      cursor:pointer; transition:0.3s;
+      text-shadow:0 0 10px #0ff;
+    }
+    .hero button:hover {
+      background:#0ff; color:#000;
+      box-shadow:0 0 20px #0ff,0 0 40px #0ff;
+      transform: scale(1.1);
+    }
+
+    /* FEATURES */
+    .features {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px; max-width:1200px; margin:100px auto; padding:0 40px;
+    }
+    .feature {
+      border-radius:20px; padding:40px 20px; text-align:center;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(0,255,255,0.3);
+      box-shadow:0 0 15px rgba(0,255,255,0.2);
+      transition:0.4s; opacity:0; transform:translateY(40px);
+    }
+    .feature i {
+      font-size:40px; margin-bottom:15px; color:#0ff;
+      text-shadow:0 0 15px #0ff;
+    }
+    .feature.show {
+      opacity:1; transform:translateY(0);
+    }
+    .feature:hover {
+      box-shadow:0 0 25px #0ff,0 0 50px #0ff;
+      transform:translateY(-10px) scale(1.05);
+    }
+
+    /* OFFERINGS */
+    .offerings {
+      padding:80px 40px; background:rgba(255,255,255,0.02);
+      text-align:center;
+    }
+    .offerings h2 {
+      font-size:40px; margin-bottom:15px; font-weight:700;
+      font-family:'Orbitron', sans-serif;
+      color:#0ff; text-shadow:0 0 20px #0ff;
+    }
+    .offerings hr {
+      width:100px; border:2px solid #0ff; margin:0 auto 30px;
+      box-shadow:0 0 15px #0ff;
+    }
+    .offer-grid {
+      display:flex; flex-wrap:wrap; justify-content:center; gap:30px;
+    }
+    .offer-item {
+      flex:1; min-width:250px; max-width:320px;
+      padding:30px; border-radius:15px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(0,255,255,0.3);
+      box-shadow:0 0 20px rgba(0,255,255,0.2);
+      transition:0.4s; opacity:0; transform:translateY(40px);
+    }
+    .offer-item.show { opacity:1; transform:translateY(0); }
+    .offer-item:hover {
+      transform:translateY(-10px) scale(1.05);
+      box-shadow:0 0 25px #0ff,0 0 50px #0ff;
+    }
+
+    /* COURSES */
+    .courses { margin-top:70px; }
+    .course-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px; max-width:1000px; margin:40px auto;
+    }
+    .course {
+      background:rgba(255,255,255,0.05);
+      border-radius:15px; padding:25px;
+      border:1px solid rgba(0,255,255,0.3);
+      box-shadow:0 0 15px rgba(0,255,255,0.2);
+      transition:0.3s;
+    }
+    .course h4 { margin-bottom:10px; color:#0ff; text-shadow:0 0 15px #0ff; }
+    .course p { font-size:14px; margin-bottom:10px; color:#ccc; }
+    .course:hover {
+      transform:translateY(-8px); box-shadow:0 0 25px #0ff,0 0 50px #0ff;
+    }
+
+    /* FOOTER */
+    footer {
+      background:#000; color:#ccc; text-align:center;
+      padding:60px 20px; opacity:0; transform:translateY(40px);
+      transition:1s; border-top:1px solid rgba(0,255,255,0.3);
+      box-shadow:0 -5px 20px rgba(0,255,255,0.2);
+    }
+    footer.show { opacity:1; transform:translateY(0); }
+    footer h3 { font-size:22px; margin:15px 0; color:#0ff; text-shadow:0 0 10px #0ff; }
+    .socials { margin-top:20px; }
+    .socials a {
+      margin:0 10px; color:#0ff; font-size:20px; transition:0.3s;
+    }
+    .socials a:hover { color:#fff; text-shadow:0 0 20px #0ff; }
+
+    /* FORM */
+    form { margin:20px auto; max-width:500px; display:flex; flex-direction:column; gap:15px; }
+    form input, form textarea {
+      padding:12px; border-radius:10px; border:none; outline:none;
+      font-size:15px; background:rgba(255,255,255,0.05);
+      color:#0ff; box-shadow:0 0 10px rgba(0,255,255,0.2);
+    }
+    form button {
+      background:transparent; border:2px solid #0ff;
+      color:#0ff; padding:12px; border-radius:50px;
+      font-weight:bold; cursor:pointer; transition:0.3s;
+      text-shadow:0 0 10px #0ff;
+    }
+    form button:hover {
+      background:#0ff; color:#000;
+      box-shadow:0 0 20px #0ff,0 0 40px #0ff;
+      transform:scale(1.05);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes glow { from{text-shadow:0 0 10px #0ff;} to{text-shadow:0 0 25px #0ff,0 0 40px #0ff;} }
+
+    /* PARTICLES */
+    #particles {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      z-index:-1; overflow:hidden;
+    }
+    .particle {
+      position:absolute; width:6px; height:6px;
+      background:#0ff; border-radius:50%;
+      opacity:0.6; animation: float 15s linear infinite;
+    }
+    @keyframes float {
+      from { transform: translateY(100vh) scale(0.5); opacity:0; }
+      to { transform: translateY(-10vh) scale(1); opacity:1; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <div id="particles"></div>
+
+  <header id="mainHeader">
+    <div class="logo">UTTAM SIKSHA INSTITUTE</div>
+    <nav>
+      <a href="#HOME">HOME</a>
+      <a href="#FEATURES">FEATURES</a>
+      <a href="#OFFERINGS">OFFERINGS</a>
+      <a href="#COURSES">COURSES</a>
+      <a href="#CONTACT">CONTACT</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="HOME">
+    <div class="hero-content">
+      <h1>Empowering Your Future</h1>
+      <p>A perfect learning centre to shape your career and dreams.</p>
+      <button onclick="document.querySelector('#FEATURES').scrollIntoView({behavior:'smooth'})">Learn More</button>
+    </div>
+  </section>
+
+  <section id="FEATURES" class="features">
+    <div class="feature"><i class="fas fa-graduation-cap"></i> Best service to students</div>
+    <div class="feature"><i class="fas fa-money-bill-wave"></i> Affordable & Low cost</div>
+    <div class="feature"><i class="fas fa-university"></i> Regular & Distance Education</div>
+    <div class="feature"><i class="fas fa-school"></i> Top Colleges across West Bengal</div>
+  </section>
+
+  <section id="OFFERINGS" class="offerings">
+    <h2>What We Offer</h2>
+    <hr />
+    <div class="offer-grid">
+      <div class="offer-item"><h3>Scholarships</h3><p>Special scholarship facilities available for ST, SC, OBC students.</p></div>
+      <div class="offer-item"><h3>Hostel Facilities</h3><p>Safe and comfortable hostels with modern amenities.</p></div>
+      <div class="offer-item"><h3>Career Guidance</h3><p>Expert counseling and support to guide students toward opportunities.</p></div>
+    </div>
+
+    <div id="COURSES" class="courses">
+      <h2>Courses</h2>
+      <hr />
+      <div class="course-grid">
+        <div class="course"><h4>B.Ed</h4><p>Duration: 2 Years</p><p>Eligibility: Graduation</p></div>
+        <div class="course"><h4>M.Ed</h4><p>Duration: 2 Years</p><p>Eligibility: B.Ed</p></div>
+        <div class="course"><h4>D.El.Ed</h4><p>Duration: 2 Years</p><p>Eligibility: 12th Pass</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="CONTACT">
+    <h3>ADDRESS</h3>
+    <p>Town Indranagar, Agartala, Tripura (W)</p>
+    <h3>CONTACT</h3>
+    <p>Phone: +91 690969827 / +91 9366305127</p>
+    <p>Email: info@uttamsiksha.edu.in</p>
+
+    <h3>CONTACT US</h3>
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="phone" placeholder="Your Phone Number" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+    <p id="formResponse" style="margin-top:10px; color:#0ff; font-weight:bold;"></p>
+
+    <div class="socials">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    const features = document.querySelectorAll('.feature');
+    const offers = document.querySelectorAll('.offer-item');
+    const footer = document.querySelector('footer');
+    const navLinks = document.querySelectorAll('nav a');
+
+    window.addEventListener('scroll', () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      features.forEach(el => { if (el.getBoundingClientRect().top < triggerBottom) el.classList.add('show'); });
+      offers.forEach(el => { if (el.getBoundingClientRect().top < triggerBottom) el.classList.add('show'); });
+      if (footer.getBoundingClientRect().top < triggerBottom) footer.classList.add('show');
+
+      document.querySelectorAll('section, footer').forEach(sec => {
+        let id = sec.getAttribute('id');
+        if (id && sec.getBoundingClientRect().top < window.innerHeight/2 && sec.getBoundingClientRect().top > -200) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          document.querySelector(`nav a[href='#${id}']`)?.classList.add('active');
+        }
+      });
+    });
+
+    // Contact form simulation
+    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      document.getElementById("formResponse").innerText = "✅ Message Sent Successfully!";
+      e.target.reset();
+    });
+
+    // Particles
+    const particlesContainer = document.getElementById("particles");
+    for(let i=0; i<50; i++){
+      const p = document.createElement("div");
+      p.className = "particle";
+      p.style.left = Math.random()*100+"%";
+      p.style.animationDuration = (10+Math.random()*20)+"s";
+      p.style.animationDelay = (-Math.random()*20)+"s";
+      particlesContainer.appendChild(p);
+    }
+  </script>
+</body>
+</html>
+
